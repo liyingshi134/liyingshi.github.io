@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>黎颖诗 | 前端开发实习生 · 个人简历</title>
+<style>
+  /* ============ 变量 ============ */
+  :root {
+    --ink:    #1f2937;
+    --accent: #2563eb;
+    --sub:    #64748b;
+    --line:   #e8eef7;
+  }
+
+  /* ============ 基础 ============ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: 16px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+                 "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+    background: #eef2f7;
+    color: #1f2937;
+    line-height: 1.7;
+    padding: 2rem 1rem 3rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============ 工具条 ============ */
+  .toolbar {
+    position: fixed; top: 1rem; right: 1rem; z-index: 99;
+    display: flex; gap: .5rem;
+  }
+  .btn {
+    border: 0; cursor: pointer;
+    font-size: .85rem; font-weight: 600; color: #fff;
+    background: linear-gradient(135deg, #2563eb, #0ea5e9);
+    padding: .55rem 1rem; border-radius: 999px;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, .35);
+    font-family: inherit; transition: transform .15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.ghost { background: #fff; color: #1e3a8a; }
+
+  /* ============ 纸张 ============ */
+  .resume {
+    max-width: 60rem;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 1.2rem 3rem rgba(15, 23, 42, .12);
+    overflow: hidden;
+  }
+
+  /* ============ 头部（左侧姓名 + 右侧联系方式 + 最右侧竖长头像） ============ */
+  .hero {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 55%, #0ea5e9 100%);
+    border-radius: 1rem 1rem 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: nowrap;
+    padding: 1.2rem 1.8rem;
+  }
+
+  /* 左侧姓名区 */
+  .hero-info {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+  .hero-info h1 {
+    margin: 0 0 3px;
+    font-size: 20px;
+    line-height: 1.1;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 3px;
+    white-space: nowrap;
+  }
+  .role {
+    margin: 0 0 2px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #dbeafe;
+    letter-spacing: .3px;
+    white-space: nowrap;
+  }
+  .edu-line {
+    margin: 0;
+    font-size: 10.5px;
+    color: rgba(255, 255, 255, .85);
+    white-space: nowrap;
+  }
+
+  /* 右侧组合：联系方式 + 头像 */
+  .hero-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+
+  /* 联系方式（垂直排列，靠右对齐） */
+  .contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    font-size: 10.5px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, .85);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .contact a { color: rgba(255, 255, 255, .85); text-decoration: none; }
+  .contact a:hover { color: #fff; }
+
+  /* --- 竖长方形头像框（位于最右侧） --- */
+  .avatar-container {
+    width: 72px;
+    height: 96px;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+  }
+  .avatar-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;   /* 关键修改：默认显示图片 */
+  }
+
+  /* ============ 正文 ============ */
+  .inner { padding: 1.4rem 2.5rem 1.8rem; }
+
+  .summary {
+    margin: 0 0 1.2rem;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #4a5266;
+    padding-left: 10px;
+    border-left: 2px solid var(--accent);
+  }
+  .summary b { color: var(--ink); font-weight: 600; }
+  .summary strong { color: var(--accent); font-weight: 700; }
+
+  .section { margin-bottom: 1.4rem; }
+  .section:last-child { margin-bottom: 0; }
+
+  .section-title {
+    display: flex; align-items: center; gap: .55rem;
+    font-size: 1.05rem; font-weight: 700; color: #1e3a8a;
+    letter-spacing: .05em;
+    padding-bottom: .35rem; margin-bottom: .8rem;
+    border-bottom: 2px solid #e8eef7;
+  }
+  .section-title::before {
+    content: ""; width: .35rem; height: 1rem; border-radius: 999px;
+    background: linear-gradient(#2563eb, #0ea5e9);
+  }
+  .section-title .en {
+    font-size: .68rem; font-weight: 600; color: #94a3b8;
+    letter-spacing: .12em; text-transform: uppercase;
+  }
+
+  .item { margin-bottom: 1.1rem; }
+  .item:last-child { margin-bottom: 0; }
+
+  .item-head {
+    display: flex; flex-wrap: wrap; gap: .15rem .7rem;
+    justify-content: space-between; align-items: baseline;
+  }
+  .item-head h3 { font-size: .95rem; font-weight: 700; color: #111827; }
+  .date { font-size: .78rem; color: #64748b; white-space: nowrap; }
+  .item-sub { font-size: .8rem; color: #64748b; margin-top: .05rem; }
+
+  .tag {
+    display: inline-block; font-size: .68rem; font-weight: 600;
+    color: #1d4ed8; background: #e3edff; border-radius: 999px;
+    padding: .02rem .55rem; margin-left: .4rem; vertical-align: middle;
+  }
+  .tag.green  { color: #047857; background: #d9f7ec; }
+  .tag.orange { color: #b45309; background: #fdeed3; }
+
+  .star { list-style: none; margin-top: .3rem; }
+  .star li {
+    position: relative; padding-left: 1rem; margin-top: .25rem;
+    font-size: .88rem; color: #374151;
+  }
+  .star li::before {
+    content: ""; position: absolute; left: .1rem; top: .62rem;
+    width: .32rem; height: .32rem; border-radius: 50%; background: #93c5fd;
+  }
+  .star b { color: #1e3a8a; font-weight: 700; }
+  .star .num { color: #dc2626; font-weight: 700; }
+
+  .dots { list-style: none; margin-top: .3rem; }
+  .dots li {
+    position: relative; padding-left: 1rem; margin-top: .25rem;
+    font-size: .88rem; color: #374151;
+  }
+  .dots li::before {
+    content: ""; position: absolute; left: .1rem; top: .62rem;
+    width: .32rem; height: .32rem; border-radius: 50%; background: #7dd3fc;
+  }
+  .dots b { color: #1e3a8a; }
+
+  .skills { display: grid; grid-template-columns: 6rem 1fr; gap: .35rem .8rem; }
+  .skills dt {
+    font-size: .84rem; font-weight: 700; color: #1e3a8a; padding-top: .05rem;
+  }
+  .skills dd { font-size: .88rem; color: #374151; }
+
+  .honors {
+    list-style: none;
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: .25rem 1.2rem;
+  }
+  .honors li {
+    position: relative; padding-left: 1rem; font-size: .88rem; color: #374151;
+  }
+  .honors li::before {
+    content: ""; position: absolute; left: .1rem; top: .62rem;
+    width: .32rem; height: .32rem; border-radius: 50%; background: #fbbf24;
+  }
+
+  .foot {
+    margin-top: 1.4rem; padding-top: .8rem;
+    border-top: 1px dashed #e2e8f0;
+    font-size: .72rem; color: #94a3b8; text-align: center;
+  }
+
+  /* ============ 响应式（手机端允许换行） ============ */
+  @media (max-width: 720px) {
+    body { padding: 0 0 1.5rem; }
+    .resume { border-radius: 0; box-shadow: none; }
+    .hero {
+      padding: 1.2rem 1rem;
+      border-radius: 0;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+    .hero-info { flex: 1 1 100%; }
+    .hero-info h1 { font-size: 18px; letter-spacing: 2px; }
+    .role, .edu-line { font-size: 10px; white-space: normal; }
+    .hero-right { flex: 1 1 100%; justify-content: space-between; margin-top: 10px; }
+    .contact { text-align: left; }
+    .inner { padding: 1.2rem 1.2rem 1.5rem; }
+    .skills { grid-template-columns: 1fr; gap: .1rem; }
+    .skills dt { margin-top: .4rem; }
+    .honors { grid-template-columns: 1fr; }
+    .toolbar { top: auto; bottom: .8rem; right: .8rem; }
+  }
+
+  /* ============ 打印 / 一页 A4 ============ */
+  @page { size: A4; margin: 12mm 13mm; }
+
+  @media print {
+    html { font-size: 11.5px; }
+    body { background: #fff; padding: 0; line-height: 1.65; }
+    .no-print { display: none !important; }
+    .resume {
+      max-width: 100%; box-shadow: none; border-radius: 0; margin: 0;
+    }
+    .hero {
+      padding: 1rem 1.2rem;
+      border-radius: 0;
+      flex-wrap: nowrap;
+      gap: 12px;
+    }
+    .hero-info h1 { font-size: 17px; letter-spacing: 2px; }
+    .role { font-size: 10px; }
+    .edu-line { font-size: 9.5px; }
+    .contact { font-size: 9.5px; }
+    .avatar-container {
+      width: 62px;
+      height: 82px;
+      border-radius: 5px;
+    }
+    .avatar-container img { display: block !important; }
+    
+    .inner { padding: 1rem .1rem 0; }
+    .section { margin-bottom: 1rem; }
+    .item { margin-bottom: .85rem; }
+    .item, .skills, .honors { break-inside: avoid; page-break-inside: avoid; }
+    .section-title { break-after: avoid; page-break-after: avoid; }
+    .foot { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <button class="btn" onclick="window.print()">🖨 导出 PDF</button>
+  <button class="btn ghost" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ 回到顶部</button>
+</div>
+
+<main class="resume">
+
+  <!-- ==================== 头部 ==================== -->
+  <header class="hero">
+    <!-- 左侧：姓名信息 -->
+    <div class="hero-info">
+      <h1>黎 颖 诗</h1>
+      <p class="role">计算机科学与技术 · 大三在读 | 求职：前端开发实习生</p>
+      <p class="edu-line">2 年 Vue / React 项目经验 · 主导 3 个上线项目 · 首屏性能优化 −62%</p>
+    </div>
+
+    <!-- 右侧：联系方式 + 竖长方形头像 -->
+    <div class="hero-right">
+      <div class="contact">
+        <span>188-2032-5179</span>
+        <a href="mailto:1742876310@qq.com">1742876310@qq.com</a>
+        <span>广州 · 可即时到岗</span>
+        <a href="https://github.com/liyingshi" target="_blank">github.com/liyingshi</a>
+      </div>
+      <div class="avatar-container" title="个人头像">
+        <img id="avatarPreview" src="lys.jpg" alt="个人头像" />
+      </div>
+    </div>
+  </header>
+
+  <div class="inner">
+
+    <!-- ==================== 个人简介 / 教育背景 ==================== -->
+    <section class="section">
+      <h2 class="section-title">个人简介 / 教育背景 <span class="en">Summary &amp; Education</span></h2>
+
+      <div class="item-head" style="margin-bottom:.35rem">
+        <h3>广州南方学院 · 计算机科学与技术（本科）</h3>
+        <span class="date">2024.09 – 2028.06</span>
+      </div>
+
+      <p class="summary">
+        GPA <b>3.8 / 5.0（专业前 10%）</b>&nbsp;|&nbsp; CET-6 527&nbsp;|&nbsp; 2024–2025 学年校三等奖学金。
+        具备 2 年 Vue3 / React 项目开发经验，主导完成 <b>3 个上线项目</b>，
+        覆盖 C2C 交易、校园外卖与在线简历生成器。熟悉前端工程化与性能优化，
+        首屏加载优化 <b>−50%</b>。求职意向：<strong>前端开发实习生</strong>。
+        <br>
+        <b>核心课程：</b>数据结构、计算机网络、操作系统、数据库、Web 前端、软件工程（均 90+）
+      </p>
+    </section>
+
+    <!-- ==================== 专业技能 ==================== -->
+    <section class="section">
+      <h2 class="section-title">专业技能 <span class="en">Skills</span></h2>
+      <dl class="skills">
+        <dt>前端基础</dt>
+        <dd>HTML5 / CSS3（Flex、Grid、响应式） / JavaScript（ES6+） / TypeScript；浏览器渲染与 HTTP 缓存</dd>
+
+        <dt>框架与工程化</dt>
+        <dd>Vue3（Pinia、Router、Vite）、React Hooks；Vant / Element Plus；Git、ESLint、Nginx、Docker 基础</dd>
+
+        <dt>后端与其他</dt>
+        <dd>MySQL、Redis、WebSocket；CET-6 527，可无障碍阅读英文文档；ICPC 省赛铜奖</dd>
+      </dl>
+    </section>
+
+    <!-- ==================== 项目经历 ==================== -->
+    <section class="section">
+      <h2 class="section-title">项目经历 <span class="en">Projects</span></h2>
+
+      <!-- 项目 1 -->
+      <article class="item">
+        <div class="item-head">
+          <h3>校园二手交易平台「青柠集市」<span class="tag">核心前端</span></h3>
+          <span class="date">2025.09 – 2026.01</span>
+        </div>
+        <p class="item-sub">Vue3 + TypeScript + Pinia + SpringBoot + MySQL&nbsp;|&nbsp;团队 4 人，负责前端架构与核心页面</p>
+        <ul class="star">
+          <li><b>背景：</b>校内二手交易依赖 QQ 群，信息零散、无法检索，每天 100+ 条信息因刷屏丢失。</li>
+          <li><b>任务：</b>负责前端架构设计、28 个页面开发，主导性能优化与接口联调。</li>
+          <li><b>挑战：</b>① 首屏 3.6s → 1.35s（路由懒加载 + 分包 + 图片懒加载）；② 长列表 20FPS → 60FPS（虚拟列表 + 分页预取）；③ 弱网环境发布失败率 12% → 1.8%（自动重试 + 草稿缓存）。</li>
+          <li><b>成果：</b>注册 <span class="num">300+</span>、日活 <span class="num">100+</span>、成交 <span class="num">120+</span>；首屏 <span class="num">−50%</span>，Lighthouse 性能 <span class="num">80</span>。</li>
+        </ul>
+      </article>
+
+      <!-- 项目 2：校园外卖平台 -->
+      <article class="item">
+        <div class="item-head">
+          <h3>校园外卖订餐平台「食光」<span class="tag orange">核心前端</span></h3>
+          <span class="date">2025.03 – 2025.05</span>
+        </div>
+        <p class="item-sub">Vue3 + Vant + Pinia + WebSocket + Node.js&nbsp;|&nbsp;团队 3 人，负责前端架构与核心交互</p>
+        <ul class="star">
+          <li><b>背景：</b>食堂高峰排队超 20 分钟，校外外卖无法进校，团队开发专属校园外卖平台。</li>
+          <li><b>任务：</b>负责前端架构、商家端与用户端 30+ 页面开发，主导高峰调优与 WebSocket 模块。</li>
+          <li><b>挑战：</b>① 高峰并发卡顿 → 接口防抖 + 缓存预热 + 虚拟列表，流畅度提升 80%；② 订单状态同步 → WebSocket 替代轮询，延迟 5s → 200ms；③ 复杂购物车状态管理 → Pinia 跨店状态机，支持满减与优惠券叠加。</li>
+          <li><b>成果：</b>首月注册 <span class="num">600+</span>，日订单峰值 <span class="num">300+</span>；响应 <span class="num">&lt;200ms</span>，同步延迟 <span class="num">−85%</span>。</li>
+        </ul>
+      </article>
+
+      <!-- 项目 3 -->
+      <article class="item">
+        <div class="item-head">
+          <h3>在线简历生成器 Web App<span class="tag green">个人开源</span></h3>
+          <span class="date">2025.06 – 2025.08</span>
+        </div>
+        <p class="item-sub">Vue3 + TypeScript + IndexedDB + 打印样式方案&nbsp;|&nbsp;独立设计与开发</p>
+        <ul class="star">
+          <li><b>背景：</b>同学用 Word 排版简历常格式错乱、导出 PDF 分页断裂，影响投递观感。</li>
+          <li><b>任务：</b>独立完成产品设计、交互与前端开发，实现「编辑 → 预览 → 导出 PDF」工具。</li>
+          <li><b>挑战：</b>① 预览与导出效果不一致 → 共用同一套 CSS + 打印分页控制，像素级一致；② 离线可用 → IndexedDB 本地存储草稿；③ 数据迁移 → 支持 JSON 一键导入导出。</li>
+          <li><b>成果：</b>GitHub <span class="num">400+ Star</span>，累计使用 <span class="num">200+</span> 次，被 2 个学院就业中心推荐。</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- ==================== 校园经历与荣誉 ==================== -->
+    <section class="section">
+      <h2 class="section-title">校园经历与荣誉 <span class="en">Honors</span></h2>
+      <div class="item">
+        <div class="item-head">
+          <h3>校科技协会 · 技术部成员</h3>
+          <span class="date">2024.09 – 2025.09</span>
+        </div>
+        <ul class="dots">
+          <li>参与 6 场前端技术分享，累计参与 <b>400+ 人次</b>；牵头搭建项目模板仓库，被 3 个学生项目复用。</li>
+        </ul>
+      </div>
+      <ul class="honors" style="margin-top:.4rem">
+        <li>蓝桥杯 Web 应用开发 · 省赛三等奖（2024）</li>
+        <li>校二等奖学金 · 专业前 10%（2024–2025 学年）</li>
+      </ul>
+    </section>
+
+    <p class="foot">
+      本简历由本人独立开发的「在线简历生成器」制作 · 支持一键导出 A4 PDF · 黎颖诗 © 2026
+    </p>
+
+  </div>
+</main>
+
+</body>
+</html>
